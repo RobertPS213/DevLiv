@@ -9,5 +9,5 @@ import com.devlib.devlib.repositories.EstanteRepository;
 public class EstanteService {
 
 	@Autowired
-	private EstanteRepository estanteRepository;
+	private EstanteRepository repository;
 }

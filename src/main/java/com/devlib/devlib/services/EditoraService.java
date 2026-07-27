@@ -9,5 +9,5 @@ import com.devlib.devlib.repositories.EditoraRepository;
 public class EditoraService {
 
 	@Autowired
-	private EditoraRepository editoraRepository;
+	private EditoraRepository repository;
 }

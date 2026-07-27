@@ -11,5 +11,5 @@ import com.devlib.devlib.services.EstanteService;
 public class EstanteController {
 	
 	@Autowired
-	private EstanteService estanteService;
+	private EstanteService service;
 }

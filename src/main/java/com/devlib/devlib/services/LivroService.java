@@ -9,5 +9,5 @@ import com.devlib.devlib.repositories.LivroRepository;
 public class LivroService {
 	
 	@Autowired
-	private LivroRepository livroRepository;
+	private LivroRepository repository;
 }

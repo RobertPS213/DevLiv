@@ -46,7 +46,11 @@ public class TestConfig implements CommandLineRunner{
 	    Autor a4 = new Autor(null, "Terry Pratchett", "Britânica");
 	    Autor a5 = new Autor(null, "Neil Gaiman", "Britânica");
 
-	    autorRepository.saveAll(Arrays.asList(a1, a2, a3, a4, a5));
+	    // Criação de um novo Autor para o teste do DELETE e evitar a violação de integridade referencial
+	    
+	    Autor a6 = new Autor(null, "Clarice Lispector", "Brasileira");
+	    
+	    autorRepository.saveAll(Arrays.asList(a1, a2, a3, a4, a5, a6));
 
 	    Categoria c1 = new Categoria(null, "Fantasia", "Livros com elementos mágicos, mundos imaginários e criaturas fantásticas.");
 	    Categoria c2 = new Categoria(null, "Romance", "Histórias com foco em relacionamentos amorosos e emoções humanas.");

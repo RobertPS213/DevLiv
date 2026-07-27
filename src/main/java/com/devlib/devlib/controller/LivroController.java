@@ -11,5 +11,5 @@ import com.devlib.devlib.services.LivroService;
 public class LivroController {
 
 	@Autowired
-	private LivroService livroService;
+	private LivroService service;
 }

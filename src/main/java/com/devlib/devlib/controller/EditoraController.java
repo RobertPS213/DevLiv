@@ -11,5 +11,5 @@ import com.devlib.devlib.services.EditoraService;
 public class EditoraController {
 
 	@Autowired
-	private EditoraService editoraService;
+	private EditoraService service;
 }

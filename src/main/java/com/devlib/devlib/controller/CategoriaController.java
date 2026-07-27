@@ -11,5 +11,5 @@ import com.devlib.devlib.services.CategoriaService;
 public class CategoriaController {
 
 	@Autowired
-	private CategoriaService categoriaService;
+	private CategoriaService service;
 }
