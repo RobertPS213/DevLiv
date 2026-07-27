@@ -76,7 +76,11 @@ public class TestConfig implements CommandLineRunner{
 	    Estante es2 = new Estante(null, "B2", "Corredor 2 - Prateleira Inferior", 30);
 	    Estante es3 = new Estante(null, "C3", "Corredor 3 - Setor de Fantasia", 40);
 
-	    estanteRepository.saveAll(Arrays.asList(es1, es2, es3));
+	    // Criação de uma nova Estante para o teste do DELETE e evitar a violação de integridade referencial
+	    
+	    Estante es4 = new Estante(null, "D4", "Corredor 4 - Prateleira Central", 35);
+	    
+	    estanteRepository.saveAll(Arrays.asList(es1, es2, es3, es4));
 
 	    Livro l1 = new Livro(null, "Dom Casmurro", "978-85-359-0277-5", 1899, 256, e1, es1, Set.of(a1), Set.of(c3));
 	    Livro l2 = new Livro(null, "Cem Anos de Solidão", "978-85-01-01234-0", 1967, 448, e2, es2, Set.of(a2), Set.of(c2));
