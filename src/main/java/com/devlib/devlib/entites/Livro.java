@@ -1,16 +1,56 @@
 package com.devlib.devlib.entites;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_livro")
 public class Livro implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String isbn;
 	private Integer anoPublicacao;
 	private Integer numeroPaginas;
+	
+	@ManyToOne
+	@JoinColumn(name = "editora_id")
+	private Editora editora;
+	
+	@ManyToOne
+	@JoinColumn(name = "estante_id")
+	private Estante estante;
+	
+	@ManyToMany
+	@JoinTable(
+		name = "tb_livro_autor",
+		joinColumns = @JoinColumn(name = "livro_id"),
+		inverseJoinColumns = @JoinColumn(name = "autor_id")
+	)
+	private Set<Autor> autores = new HashSet<>();
+	
+	@ManyToMany
+	@JoinTable(
+		name = "tb_livro_categoria",
+		joinColumns = @JoinColumn(name = "livro_id"),
+		inverseJoinColumns = @JoinColumn(name = "categoria_id")
+	)
+	private Set<Categoria> categorias = new HashSet<>();
 	
 	public Livro() {
 		
