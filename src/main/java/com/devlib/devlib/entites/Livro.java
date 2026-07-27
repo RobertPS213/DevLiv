@@ -55,12 +55,16 @@ public class Livro implements Serializable {
 	public Livro() {
 		
 	}
-	public Livro(Long id, String titulo, String isbn, Integer anoPublicacao, Integer numeroPaginas) {
+	public Livro(Long id, String titulo, String isbn, Integer anoPublicacao, Integer numeroPaginas, Editora editora, Estante estante, Set<Autor> autores, Set<Categoria> categorias) {
 		this.id = id;
 		this.titulo = titulo;
 		this.isbn = isbn;
 		this.anoPublicacao = anoPublicacao;
 		this.numeroPaginas = numeroPaginas;
+		this.editora = editora;
+		this.estante = estante;
+		this.autores = autores;
+		this.categorias = categorias;
 	}
 	public Long getId() {
 		return id;
@@ -91,6 +95,25 @@ public class Livro implements Serializable {
 	}
 	public void setNumeroPaginas(Integer numeroPaginas) {
 		this.numeroPaginas = numeroPaginas;
+	}
+	
+	public Editora getEditora() {
+		return editora;
+	}
+	public void setEditora(Editora editora) {
+		this.editora = editora;
+	}
+	public Estante getEstante() {
+		return estante;
+	}
+	public void setEstante(Estante estante) {
+		this.estante = estante;
+	}
+	public Set<Autor> getAutores() {
+		return autores;
+	}
+	public Set<Categoria> getCategorias() {
+		return categorias;
 	}
 	@Override
 	public int hashCode() {
