@@ -1,8 +1,7 @@
 package com.devlib.devlib.services;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +15,8 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repository;
 	
-	public Set<Categoria> findAll(){
-		Set<Categoria> categorias = new HashSet<>(repository.findAll());
-		return categorias;
+	public List<Categoria> findAll(){
+		return repository.findAll();
 	}
 	public Categoria findById(Long id) {
 		Optional<Categoria> categoria = repository.findById(id);

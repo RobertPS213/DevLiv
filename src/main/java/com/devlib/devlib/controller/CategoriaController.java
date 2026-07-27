@@ -1,7 +1,7 @@
 package com.devlib.devlib.controller;
 
 import java.net.URI;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +26,8 @@ public class CategoriaController {
 	private CategoriaService service;
 	
 	@GetMapping
-	public ResponseEntity<Set<Categoria>> findAll(){
-		Set<Categoria> categorias = service.findAll();
+	public ResponseEntity<List<Categoria>> findAll(){
+		List<Categoria> categorias = service.findAll();
 		return ResponseEntity.ok().body(categorias);
 	}
 	@GetMapping(value = "/{id}")

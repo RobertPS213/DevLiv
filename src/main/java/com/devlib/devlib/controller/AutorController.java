@@ -1,7 +1,7 @@
 package com.devlib.devlib.controller;
 
 import java.net.URI;
-import java.util.Set;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +26,8 @@ public class AutorController {
 	private AutorService service;
 	
 	@GetMapping
-	public ResponseEntity<Set<Autor>> findAll(){
-		Set<Autor> autores = service.findAll();
+	public ResponseEntity<List<Autor>> findAll(){
+		List<Autor> autores = service.findAll();
 		return ResponseEntity.ok().body(autores);
 	}
 	@GetMapping(value = "/{id}")
