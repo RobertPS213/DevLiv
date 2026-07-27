@@ -36,10 +36,10 @@ public class CategoriaController {
 		return ResponseEntity.ok().body(categoria);
 	}
 	@PostMapping
-	public ResponseEntity<Categoria> insert(@RequestBody Categoria categoria){
-		categoria = service.insert(categoria);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
-		return ResponseEntity.created(uri).body(categoria);
+	public ResponseEntity<Categoria> insert(@RequestBody Categoria entity){
+		entity = service.insert(entity);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getId()).toUri();
+		return ResponseEntity.created(uri).body(entity);
 	}
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody Categoria entity){

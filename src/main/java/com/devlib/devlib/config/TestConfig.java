@@ -56,7 +56,7 @@ public class TestConfig implements CommandLineRunner{
 	    Categoria c2 = new Categoria(null, "Romance", "Histórias com foco em relacionamentos amorosos e emoções humanas.");
 	    Categoria c3 = new Categoria(null, "Literatura Brasileira", "Obras de autores nacionais, clássicas e contemporâneas.");
 
-	 // Criação de uma nova Categoria para o teste do DELETE e evitar a violação de integridade referencial
+	    // Criação de uma nova Categoria para o teste do DELETE e evitar a violação de integridade referencial
 
 	    Categoria c4 = new Categoria(null, "Ficção Científica", "Livros que exploram tecnologias futuristas, viagens espaciais e sociedades avançadas.");
 	    
@@ -66,7 +66,11 @@ public class TestConfig implements CommandLineRunner{
 	    Editora e2 = new Editora(null, "Editora Rocco", "33.518.897/0001-80", "atendimento@rocco.com.br");
 	    Editora e3 = new Editora(null, "Penguin Random House", "12.345.678/0001-99", "contact@penguinrandomhouse.com");
 
-	    editoraRepository.saveAll(Arrays.asList(e1, e2, e3));
+		// Criação de uma nova Editora para o teste do DELETE e evitar a violação de integridade referencial
+
+	    Editora e4 = new Editora(null, "Editora Globo", "45.987.632/0001-12", "contato@editoraglobo.com.br");
+	    
+	    editoraRepository.saveAll(Arrays.asList(e1, e2, e3, e4));
 
 	    Estante es1 = new Estante(null, "A1", "Corredor 1 - Prateleira Superior", 50);
 	    Estante es2 = new Estante(null, "B2", "Corredor 2 - Prateleira Inferior", 30);
