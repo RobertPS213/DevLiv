@@ -43,8 +43,8 @@ public class AutorController {
 	}
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Autor> update(@PathVariable Long id, @RequestBody Autor entity){
-		service.update(id, entity);
-		return ResponseEntity.ok().body(entity);
+		Autor autor = service.update(id, entity);
+		return ResponseEntity.ok().body(autor);
 	}
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id){

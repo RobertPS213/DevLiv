@@ -56,7 +56,11 @@ public class TestConfig implements CommandLineRunner{
 	    Categoria c2 = new Categoria(null, "Romance", "Histórias com foco em relacionamentos amorosos e emoções humanas.");
 	    Categoria c3 = new Categoria(null, "Literatura Brasileira", "Obras de autores nacionais, clássicas e contemporâneas.");
 
-	    categoriaRepository.saveAll(Arrays.asList(c1, c2, c3));
+	 // Criação de uma nova Categoria para o teste do DELETE e evitar a violação de integridade referencial
+
+	    Categoria c4 = new Categoria(null, "Ficção Científica", "Livros que exploram tecnologias futuristas, viagens espaciais e sociedades avançadas.");
+	    
+	    categoriaRepository.saveAll(Arrays.asList(c1, c2, c3, c4));
 
 	    Editora e1 = new Editora(null, "Companhia das Letras", "60.643.313/0001-30", "contato@companhiadasletras.com.br");
 	    Editora e2 = new Editora(null, "Editora Rocco", "33.518.897/0001-80", "atendimento@rocco.com.br");
