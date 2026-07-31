@@ -21,13 +21,16 @@ public class AutorService {
 		return repository.findAll();
 	}
 	public Autor findById(Long id) {
+		validationAutorId(id);
 		Optional<Autor> autor = repository.findById(id);
 		return autor.get();
 	}
 	public Autor insert(Autor autor) {
+		badRequestId(autor);
 	    return repository.save(autor);
 	}
 	public Autor update(Long id, Autor entity) {
+		validationAutorId(id);
 		Autor autor = repository.getReferenceById(id);
 		updateData(autor, entity);
 		return repository.save(autor);
@@ -37,6 +40,7 @@ public class AutorService {
 		autor.setNacionalidade(entity.getNacionalidade());
 	}
 	public void delete(Long id) {
+		validationAutorId(id);
 		repository.deleteById(id);
 	}
 	public void validationAutorId(Long id){
