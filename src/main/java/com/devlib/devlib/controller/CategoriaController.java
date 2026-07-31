@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devlib.devlib.entites.Categoria;
 import com.devlib.devlib.services.CategoriaService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaController {
@@ -36,13 +38,13 @@ public class CategoriaController {
 		return ResponseEntity.ok().body(categoria);
 	}
 	@PostMapping
-	public ResponseEntity<Categoria> insert(@RequestBody Categoria entity){
+	public ResponseEntity<Categoria> insert(@Valid @RequestBody Categoria entity){
 		entity = service.insert(entity);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getId()).toUri();
 		return ResponseEntity.created(uri).body(entity);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody Categoria entity){
+	public ResponseEntity<Categoria> update(@PathVariable Long id, @Valid @RequestBody Categoria entity){
 		Categoria categoria = service.update(id, entity);
 		return ResponseEntity.ok().body(categoria);
 	}

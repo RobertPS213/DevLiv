@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_categoria")
@@ -17,7 +18,9 @@ public class Categoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "O título deve ser preenchido")
 	private String titulo;
+	@NotBlank(message = "A descrição deve ser preenchida")
 	private String descricao;
 	
 	public Categoria() {
