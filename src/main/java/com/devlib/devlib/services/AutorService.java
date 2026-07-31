@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.devlib.devlib.entites.Autor;
 import com.devlib.devlib.repositories.AutorRepository;
+import com.devlib.devlib.services.exceptions.AutorNotFoundException;
+import com.devlib.devlib.services.exceptions.BadRequestException;
 
 @Service
 public class AutorService {
@@ -36,5 +38,15 @@ public class AutorService {
 	}
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+	public void validationAutorId(Long id){
+		if(!repository.existsById(id)) {
+			throw new AutorNotFoundException(id);
+		}
+	}
+	public void badRequestId(Autor autor) {
+		if (autor.getId() != null) {
+	        throw new BadRequestException();
+	    }
 	}
 }
