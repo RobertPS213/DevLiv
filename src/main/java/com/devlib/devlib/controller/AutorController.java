@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devlib.devlib.entites.Autor;
 import com.devlib.devlib.services.AutorService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/autores")
 public class AutorController {
@@ -36,13 +38,13 @@ public class AutorController {
 		return ResponseEntity.ok().body(autor);
 	}
 	@PostMapping
-	public ResponseEntity<Autor> insert(@RequestBody Autor autor){
+	public ResponseEntity<Autor> insert(@Valid @RequestBody Autor autor){
 		autor = service.insert(autor);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();
 		return ResponseEntity.created(uri).body(autor);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Autor> update(@PathVariable Long id, @RequestBody Autor entity){
+	public ResponseEntity<Autor> update(@PathVariable Long id, @Valid @RequestBody Autor entity){
 		Autor autor = service.update(id, entity);
 		return ResponseEntity.ok().body(autor);
 	}

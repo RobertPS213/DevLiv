@@ -23,7 +23,7 @@ public class AutorService {
 		return autor.get();
 	}
 	public Autor insert(Autor autor) {
-		return repository.save(autor);
+	    return repository.save(autor);
 	}
 	public Autor update(Long id, Autor entity) {
 		Autor autor = repository.getReferenceById(id);
