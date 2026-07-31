@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devlib.devlib.entites.Editora;
 import com.devlib.devlib.services.EditoraService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/editoras")
 public class EditoraController {
@@ -36,13 +38,13 @@ public class EditoraController {
 		return ResponseEntity.ok().body(editora);
 	}
 	@PostMapping
-	public ResponseEntity<Editora> insert(@RequestBody Editora editora){
+	public ResponseEntity<Editora> insert(@Valid @RequestBody Editora editora){
 		editora = service.insert(editora);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(editora.getId()).toUri();
 		return ResponseEntity.created(uri).body(editora);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Editora> update(@PathVariable Long id, @RequestBody Editora entity){
+	public ResponseEntity<Editora> update(@PathVariable Long id, @Valid @RequestBody Editora entity){
 		Editora editora = service.update(id, entity);
 		return ResponseEntity.ok().body(editora);
 	}

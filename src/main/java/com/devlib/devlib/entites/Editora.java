@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_editora")
@@ -17,8 +18,11 @@ public class Editora implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "O nome deve ser preenchido")
 	private String nome;
+	@NotBlank(message = "O CNPJ deve ser preenchido")
 	private String cnpj;
+	@NotBlank(message = "O email deve ser preenchido")
 	private String email;
 	
 	public Editora() {
