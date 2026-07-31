@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.services.EstanteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/estantes")
 public class EstanteController {
@@ -36,13 +38,13 @@ public class EstanteController {
 		return ResponseEntity.ok().body(estante);
 	}
 	@PostMapping
-	public ResponseEntity<Estante> insert(@RequestBody Estante estante){
+	public ResponseEntity<Estante> insert(@Valid @RequestBody Estante estante){
 		estante = service.insert(estante);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(estante.getId()).toUri();
 		return ResponseEntity.created(uri).body(estante);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Estante> update(@PathVariable Long id, @RequestBody Estante entity){
+	public ResponseEntity<Estante> update(@PathVariable Long id, @Valid @RequestBody Estante entity){
 		Estante estante = service.update(id, entity);
 		return ResponseEntity.ok().body(estante);
 	}

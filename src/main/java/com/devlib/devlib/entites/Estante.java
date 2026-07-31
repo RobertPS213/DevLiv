@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_estante")
@@ -17,8 +19,11 @@ public class Estante implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank(message = "O codigo deve ser preenchido")
 	private String codigo;
+	@NotBlank(message = "A localização deve ser preenchido")
 	private String localizacao;
+	@NotNull(message = "A capacidade não pode ser nula")
 	private Integer capacidade;
 	
 	public Estante() {
