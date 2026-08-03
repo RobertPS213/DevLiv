@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devlib.devlib.DTO.LivroDTO;
 import com.devlib.devlib.entites.Livro;
 import com.devlib.devlib.services.LivroService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/livros")
@@ -36,13 +39,13 @@ public class LivroController {
 		return ResponseEntity.ok().body(livro);
 	}
 	@PostMapping
-	public ResponseEntity<Livro> insert(@RequestBody Livro livro){
-		livro = service.insert(livro);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livro.getId()).toUri();
-		return ResponseEntity.created(uri).body(livro);
+	public ResponseEntity<Livro> insert(@Valid @RequestBody LivroDTO livroDTO){
+		Livro livroRecebido = service.insert(livroDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livroRecebido.getId()).toUri();
+		return ResponseEntity.created(uri).body(livroRecebido);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Livro> update(@PathVariable Long id, @RequestBody Livro entity){
+	public ResponseEntity<Livro> update(@PathVariable Long id, @Valid @RequestBody Livro entity){
 		Livro livro = service.update(id, entity);
 		return ResponseEntity.ok().body(livro);
 	}
