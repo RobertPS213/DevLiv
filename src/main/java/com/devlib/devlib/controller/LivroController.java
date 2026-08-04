@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devlib.devlib.DTO.LivroDTO;
+import com.devlib.devlib.DTO.LivroInsertDTO;
 import com.devlib.devlib.DTO.LivroUpdateDTO;
 import com.devlib.devlib.entites.Livro;
 import com.devlib.devlib.services.LivroService;
@@ -40,7 +40,7 @@ public class LivroController {
 		return ResponseEntity.ok().body(livro);
 	}
 	@PostMapping
-	public ResponseEntity<Livro> insert(@Valid @RequestBody LivroDTO livroDTO){
+	public ResponseEntity<Livro> insert(@Valid @RequestBody LivroInsertDTO livroDTO){
 		Livro livroRecebido = service.insert(livroDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livroRecebido.getId()).toUri();
 		return ResponseEntity.created(uri).body(livroRecebido);

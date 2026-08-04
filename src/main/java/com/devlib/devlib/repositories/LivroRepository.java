@@ -8,4 +8,5 @@ import com.devlib.devlib.entites.Livro;
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Long> {
 
+	boolean existsByAutoresId(Long id);
 }

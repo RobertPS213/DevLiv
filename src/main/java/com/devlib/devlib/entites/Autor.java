@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_autor")
@@ -18,9 +17,7 @@ public class Autor implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank(message = "O nome deve ser preenchido")
 	private String nome;
-	@NotBlank(message = "A nacionalidade deve ser preenchida")
 	private String nacionalidade;
 	
 	public Autor() {

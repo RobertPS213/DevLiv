@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class LivroDTO {
+public class LivroInsertDTO {
 	
 	@NotBlank(message = "O titulo deve ser preenchido")
 	private String titulo;
@@ -26,10 +26,10 @@ public class LivroDTO {
 	@NotEmpty(message = "O livro precisa ter pelo menos uma categoria")
 	private Set<@NotNull(message = "A categoria não pode ser nula")Long> categoriasId = new HashSet<>();
 	
-	public LivroDTO() {
+	public LivroInsertDTO() {
 		
 	}
-	public LivroDTO(String titulo, String isbn, Integer anoPublicacao, Integer numeroPaginas,
+	public LivroInsertDTO(String titulo, String isbn, Integer anoPublicacao, Integer numeroPaginas,
 			Long editoraId, Long estanteId, Set<Long> autoresId, Set<Long> categoriasId) {
 		this.titulo = titulo;
 		this.isbn = isbn;

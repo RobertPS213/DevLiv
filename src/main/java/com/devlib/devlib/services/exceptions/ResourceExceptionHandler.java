@@ -28,6 +28,17 @@ public class ResourceExceptionHandler {
 		);
 		return ResponseEntity.status(status).body(err);
 	}
+	@ExceptionHandler(ExceptionBaseDeletion.class)
+	public ResponseEntity<StandardError> exceptions(ExceptionBaseDeletion e, HttpServletRequest request){
+		HttpStatus status  = HttpStatus.CONFLICT;
+		StandardError err = new StandardError(
+				date.format(fmt),
+				status.value(),
+				e.getMessage(),
+				request.getRequestURI()
+		);
+		return ResponseEntity.status(status).body(err);
+	}
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest request){
 		HttpStatus status = HttpStatus.BAD_REQUEST;
