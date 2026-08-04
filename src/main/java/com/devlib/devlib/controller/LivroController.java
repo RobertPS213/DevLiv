@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devlib.devlib.DTO.LivroDTO;
+import com.devlib.devlib.DTO.LivroUpdateDTO;
 import com.devlib.devlib.entites.Livro;
 import com.devlib.devlib.services.LivroService;
 
@@ -45,7 +46,7 @@ public class LivroController {
 		return ResponseEntity.created(uri).body(livroRecebido);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Livro> update(@PathVariable Long id, @Valid @RequestBody Livro entity){
+	public ResponseEntity<Livro> update(@PathVariable Long id, @Valid @RequestBody LivroUpdateDTO entity){
 		Livro livro = service.update(id, entity);
 		return ResponseEntity.ok().body(livro);
 	}

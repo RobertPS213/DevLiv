@@ -2,12 +2,12 @@ package com.devlib.devlib.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devlib.devlib.DTO.LivroDTO;
+import com.devlib.devlib.DTO.LivroUpdateDTO;
 import com.devlib.devlib.entites.Autor;
 import com.devlib.devlib.entites.Categoria;
 import com.devlib.devlib.entites.Editora;
@@ -58,7 +58,6 @@ public class LivroService {
 		return livro;
 	}
 	public Livro insert(LivroDTO livroDTO) {
-		badRequestId(livroDTO);
 		Livro livro = new Livro();
 		livro.setTitulo(livroDTO.getTitulo());
 		livro.setIsbn(livroDTO.getIsbn());
@@ -80,19 +79,23 @@ public class LivroService {
 		livro.getCategorias().addAll(listaCategoria);
 		return repository.save(livro);
 	}
-	public Livro update(Long id, Livro entity) {
+	public Livro update(Long id, LivroUpdateDTO entity) {
 		Livro livro = repository.findById(id)
 				.orElseThrow(() -> new LivroNotFoundException(id));
 		updateData(livro, entity);
 		return repository.save(livro);
 	}
-	public void updateData(Livro livro, Livro entity) {
+	public void updateData(Livro livro, LivroUpdateDTO entity) {
 		livro.setTitulo(entity.getTitulo());
 		livro.setIsbn(entity.getIsbn());
 		livro.setAnoPublicacao(entity.getAnoPublicacao());
 		livro.setNumeroPaginas(entity.getNumeroPaginas());
-		livro.setEditora(entity.getEditora());
-		livro.setEstante(entity.getEstante());
+		Editora editora = editoraRepository.findById(entity.getEditoraId())
+				.orElseThrow(() -> new EditoraNotFoundException(entity.getEditoraId()));
+		livro.setEditora(editora);
+		Estante estante = estanteRepository.findById(entity.getEstanteId())
+				.orElseThrow(() -> new EstanteNotFoundException(entity.getEstanteId()));
+		livro.setEstante(estante);
 	}
 	public Livro adicionarAutor(Long livroId, Long autorId) {
 		Livro livro = repository.findById(livroId)
@@ -142,11 +145,6 @@ public class LivroService {
 	public void delete(Long id) {
 		if(!repository.existsById(id)) throw new LivroNotFoundException(id);
 		repository.deleteById(id);
-	}
-	public void badRequestId(LivroDTO livroDTO) {
-		if (livroDTO.getId() != null) {
-	        throw new BadRequestException();
-	    }
 	}
 	public void validationIdAutores(List<Long> listaIds, List<Autor> listaAutores) {
 		if(listaIds.size() != listaAutores.size()) {
