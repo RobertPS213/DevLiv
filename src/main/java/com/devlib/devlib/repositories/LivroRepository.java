@@ -9,4 +9,5 @@ import com.devlib.devlib.entites.Livro;
 public interface LivroRepository extends JpaRepository<Livro, Long> {
 
 	boolean existsByAutoresId(Long id);
+	boolean existsByCategoriasId(Long id);
 }

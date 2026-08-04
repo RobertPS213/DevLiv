@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devlib.devlib.DTO.CategoriaInsertDTO;
+import com.devlib.devlib.DTO.CategoriaUpdateDTO;
 import com.devlib.devlib.entites.Categoria;
 import com.devlib.devlib.services.CategoriaService;
 
@@ -38,13 +40,13 @@ public class CategoriaController {
 		return ResponseEntity.ok().body(categoria);
 	}
 	@PostMapping
-	public ResponseEntity<Categoria> insert(@Valid @RequestBody Categoria entity){
-		entity = service.insert(entity);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity.getId()).toUri();
-		return ResponseEntity.created(uri).body(entity);
+	public ResponseEntity<Categoria> insert(@Valid @RequestBody CategoriaInsertDTO categoriaDTO){
+		Categoria categoria = service.insert(categoriaDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
+		return ResponseEntity.created(uri).body(categoria);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Categoria> update(@PathVariable Long id, @Valid @RequestBody Categoria entity){
+	public ResponseEntity<Categoria> update(@PathVariable Long id, @Valid @RequestBody CategoriaUpdateDTO entity){
 		Categoria categoria = service.update(id, entity);
 		return ResponseEntity.ok().body(categoria);
 	}
