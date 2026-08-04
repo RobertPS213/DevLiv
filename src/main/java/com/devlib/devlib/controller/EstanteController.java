@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devlib.devlib.DTO.EstanteInsertDTO;
+import com.devlib.devlib.DTO.EstanteUpdateDTO;
 import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.services.EstanteService;
 
@@ -38,13 +40,13 @@ public class EstanteController {
 		return ResponseEntity.ok().body(estante);
 	}
 	@PostMapping
-	public ResponseEntity<Estante> insert(@Valid @RequestBody Estante estante){
-		estante = service.insert(estante);
+	public ResponseEntity<Estante> insert(@Valid @RequestBody EstanteInsertDTO estanteDTO){
+		Estante estante = service.insert(estanteDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(estante.getId()).toUri();
 		return ResponseEntity.created(uri).body(estante);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Estante> update(@PathVariable Long id, @Valid @RequestBody Estante entity){
+	public ResponseEntity<Estante> update(@PathVariable Long id, @Valid @RequestBody EstanteUpdateDTO entity){
 		Estante estante = service.update(id, entity);
 		return ResponseEntity.ok().body(estante);
 	}

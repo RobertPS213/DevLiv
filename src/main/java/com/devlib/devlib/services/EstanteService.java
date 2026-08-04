@@ -1,14 +1,16 @@
 package com.devlib.devlib.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.devlib.devlib.DTO.EstanteInsertDTO;
+import com.devlib.devlib.DTO.EstanteUpdateDTO;
 import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.repositories.EstanteRepository;
-import com.devlib.devlib.services.exceptions.BadRequestException;
+import com.devlib.devlib.repositories.LivroRepository;
+import com.devlib.devlib.services.exceptions.EstanteDeletionException;
 import com.devlib.devlib.services.exceptions.EstanteNotFoundException;
 
 @Service
@@ -17,41 +19,38 @@ public class EstanteService {
 	@Autowired
 	private EstanteRepository repository;
 	
+	@Autowired
+	private LivroRepository livroRepository;
+	
 	public List<Estante> findAll(){
 		return repository.findAll();
 	}
 	public Estante findById(Long id) {
-		validationEstanteId(id);
-		Optional<Estante> estante = repository.findById(id);
-		return estante.get();
+		Estante estante = repository.findById(id)
+				.orElseThrow(() -> new EstanteNotFoundException(id));
+		return estante;
 	}
-	public Estante insert(Estante estante) {
-		badRequestId(estante);
+	public Estante insert(EstanteInsertDTO estanteDTO) {
+		Estante estante = new Estante();
+		estante.setCodigo(estanteDTO.getCodigo());
+		estante.setLocalizacao(estanteDTO.getLocalizacao());
+		estante.setCapacidade(estanteDTO.getCapacidade());
 		return repository.save(estante);
 	}
-	public Estante update(Long id, Estante entity) {
-		validationEstanteId(id);
-		Estante estante = repository.getReferenceById(id);
+	public Estante update(Long id, EstanteUpdateDTO entity) {
+		Estante estante = repository.findById(id)
+				.orElseThrow(() -> new EstanteNotFoundException(id));
 		updateData(estante, entity);
 		return repository.save(estante);
 	}
-	public void updateData(Estante estante, Estante entity) {
+	public void updateData(Estante estante, EstanteUpdateDTO entity) {
 		estante.setCodigo(entity.getCodigo());
 		estante.setLocalizacao(entity.getLocalizacao());
 		estante.setCapacidade(entity.getCapacidade());
 	}
 	public void delete(Long id) {
-		validationEstanteId(id);
+		if(livroRepository.existsByEstanteId(id)) throw new EstanteDeletionException(id);
+		if(!repository.existsById(id)) throw new EstanteNotFoundException(id);
 		repository.deleteById(id);
-	}
-	public void validationEstanteId(Long id){
-		if(!repository.existsById(id)) {
-			throw new EstanteNotFoundException(id);
-		}
-	}
-	public void badRequestId(Estante estante) {
-		if (estante.getId() != null) {
-	        throw new BadRequestException();
-	    }
 	}
 }
