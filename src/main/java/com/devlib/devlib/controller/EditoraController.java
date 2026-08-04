@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.devlib.devlib.DTO.EditoraInsertDTO;
+import com.devlib.devlib.DTO.EditoraUpdateDTO;
 import com.devlib.devlib.entites.Editora;
 import com.devlib.devlib.services.EditoraService;
 
@@ -38,13 +40,13 @@ public class EditoraController {
 		return ResponseEntity.ok().body(editora);
 	}
 	@PostMapping
-	public ResponseEntity<Editora> insert(@Valid @RequestBody Editora editora){
-		editora = service.insert(editora);
+	public ResponseEntity<Editora> insert(@Valid @RequestBody EditoraInsertDTO editoraDTO){
+		Editora editora = service.insert(editoraDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(editora.getId()).toUri();
 		return ResponseEntity.created(uri).body(editora);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Editora> update(@PathVariable Long id, @Valid @RequestBody Editora entity){
+	public ResponseEntity<Editora> update(@PathVariable Long id, @Valid @RequestBody EditoraUpdateDTO entity){
 		Editora editora = service.update(id, entity);
 		return ResponseEntity.ok().body(editora);
 	}
