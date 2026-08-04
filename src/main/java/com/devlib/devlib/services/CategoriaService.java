@@ -10,8 +10,8 @@ import com.devlib.devlib.DTO.CategoriaUpdateDTO;
 import com.devlib.devlib.entites.Categoria;
 import com.devlib.devlib.repositories.CategoriaRepository;
 import com.devlib.devlib.repositories.LivroRepository;
-import com.devlib.devlib.services.exceptions.CategoriaDeletionException;
-import com.devlib.devlib.services.exceptions.CategoriaNotFoundException;
+import com.devlib.devlib.services.exceptions.categoria.CategoriaDeletionException;
+import com.devlib.devlib.services.exceptions.categoria.CategoriaNotFoundException;
 
 @Service
 public class CategoriaService {

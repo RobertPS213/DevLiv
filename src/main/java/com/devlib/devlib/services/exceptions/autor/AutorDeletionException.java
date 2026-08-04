@@ -1,4 +1,6 @@
-package com.devlib.devlib.services.exceptions;
+package com.devlib.devlib.services.exceptions.autor;
+
+import com.devlib.devlib.services.exceptions.base.ExceptionBaseDeletion;
 
 public class AutorDeletionException extends ExceptionBaseDeletion {
 	private static final long serialVersionUID = 1L;

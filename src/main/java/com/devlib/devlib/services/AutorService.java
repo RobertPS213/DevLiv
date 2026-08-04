@@ -10,8 +10,8 @@ import com.devlib.devlib.DTO.AutorUpdateDTO;
 import com.devlib.devlib.entites.Autor;
 import com.devlib.devlib.repositories.AutorRepository;
 import com.devlib.devlib.repositories.LivroRepository;
-import com.devlib.devlib.services.exceptions.AutorDeletionException;
-import com.devlib.devlib.services.exceptions.AutorNotFoundException;
+import com.devlib.devlib.services.exceptions.autor.AutorDeletionException;
+import com.devlib.devlib.services.exceptions.autor.AutorNotFoundException;
 
 @Service
 public class AutorService {

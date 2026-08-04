@@ -10,8 +10,8 @@ import com.devlib.devlib.DTO.EditoraUpdateDTO;
 import com.devlib.devlib.entites.Editora;
 import com.devlib.devlib.repositories.EditoraRepository;
 import com.devlib.devlib.repositories.LivroRepository;
-import com.devlib.devlib.services.exceptions.EditoraDeletionException;
-import com.devlib.devlib.services.exceptions.EditoraNotFoundException;
+import com.devlib.devlib.services.exceptions.editora.EditoraDeletionException;
+import com.devlib.devlib.services.exceptions.editora.EditoraNotFoundException;
 
 @Service
 public class EditoraService {

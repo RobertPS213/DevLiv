@@ -1,4 +1,6 @@
-package com.devlib.devlib.services.exceptions;
+package com.devlib.devlib.services.exceptions.estante;
+
+import com.devlib.devlib.services.exceptions.base.ExceptionBase;
 
 public class EstanteNotFoundException extends ExceptionBase {
 	private static final long serialVersionUID = 1L;

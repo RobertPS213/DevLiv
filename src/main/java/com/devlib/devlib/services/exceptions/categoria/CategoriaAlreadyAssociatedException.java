@@ -1,4 +1,6 @@
-package com.devlib.devlib.services.exceptions;
+package com.devlib.devlib.services.exceptions.categoria;
+
+import com.devlib.devlib.services.exceptions.base.ExceptionBase;
 
 public class CategoriaAlreadyAssociatedException extends ExceptionBase {
 	private static final long serialVersionUID = 1L;

@@ -18,17 +18,17 @@ import com.devlib.devlib.repositories.CategoriaRepository;
 import com.devlib.devlib.repositories.EditoraRepository;
 import com.devlib.devlib.repositories.EstanteRepository;
 import com.devlib.devlib.repositories.LivroRepository;
-import com.devlib.devlib.services.exceptions.AutorAlreadyAssociatedException;
-import com.devlib.devlib.services.exceptions.AutorNotAssociatedException;
-import com.devlib.devlib.services.exceptions.AutorNotFoundException;
-import com.devlib.devlib.services.exceptions.CategoriaAlreadyAssociatedException;
-import com.devlib.devlib.services.exceptions.CategoriaNotAssociatedException;
-import com.devlib.devlib.services.exceptions.CategoriaNotFoundException;
-import com.devlib.devlib.services.exceptions.EditoraNotFoundException;
-import com.devlib.devlib.services.exceptions.EstanteNotFoundException;
-import com.devlib.devlib.services.exceptions.IdAutoresNotFoundException;
-import com.devlib.devlib.services.exceptions.IdCategoriasNotFoundException;
-import com.devlib.devlib.services.exceptions.LivroNotFoundException;
+import com.devlib.devlib.services.exceptions.autor.AutorAlreadyAssociatedException;
+import com.devlib.devlib.services.exceptions.autor.AutorNotAssociatedException;
+import com.devlib.devlib.services.exceptions.autor.AutorNotFoundException;
+import com.devlib.devlib.services.exceptions.autor.IdAutoresNotFoundException;
+import com.devlib.devlib.services.exceptions.categoria.CategoriaAlreadyAssociatedException;
+import com.devlib.devlib.services.exceptions.categoria.CategoriaNotAssociatedException;
+import com.devlib.devlib.services.exceptions.categoria.CategoriaNotFoundException;
+import com.devlib.devlib.services.exceptions.categoria.IdCategoriasNotFoundException;
+import com.devlib.devlib.services.exceptions.editora.EditoraNotFoundException;
+import com.devlib.devlib.services.exceptions.estante.EstanteNotFoundException;
+import com.devlib.devlib.services.exceptions.livro.LivroNotFoundException;
 
 @Service
 public class LivroService {

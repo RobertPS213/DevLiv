@@ -1,4 +1,4 @@
-package com.devlib.devlib.services.exceptions;
+package com.devlib.devlib.services.exceptions.handler;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.devlib.devlib.services.exceptions.StandardError;
+import com.devlib.devlib.services.exceptions.base.ExceptionBase;
+import com.devlib.devlib.services.exceptions.base.ExceptionBaseDeletion;
 
 import jakarta.servlet.http.HttpServletRequest;
 

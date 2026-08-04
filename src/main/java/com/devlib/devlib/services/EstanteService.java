@@ -10,8 +10,8 @@ import com.devlib.devlib.DTO.EstanteUpdateDTO;
 import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.repositories.EstanteRepository;
 import com.devlib.devlib.repositories.LivroRepository;
-import com.devlib.devlib.services.exceptions.EstanteDeletionException;
-import com.devlib.devlib.services.exceptions.EstanteNotFoundException;
+import com.devlib.devlib.services.exceptions.estante.EstanteDeletionException;
+import com.devlib.devlib.services.exceptions.estante.EstanteNotFoundException;
 
 @Service
 public class EstanteService {

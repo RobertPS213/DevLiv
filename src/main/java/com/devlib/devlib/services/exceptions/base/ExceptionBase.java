@@ -1,4 +1,4 @@
-package com.devlib.devlib.services.exceptions;
+package com.devlib.devlib.services.exceptions.base;
 
 public class ExceptionBase extends RuntimeException {
 	private static final long serialVersionUID = 1L;
