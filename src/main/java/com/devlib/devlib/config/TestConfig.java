@@ -20,7 +20,7 @@ import com.devlib.devlib.repositories.EstanteRepository;
 import com.devlib.devlib.repositories.LivroRepository;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class TestConfig implements CommandLineRunner{
 
 	@Autowired
