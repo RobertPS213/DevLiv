@@ -40,6 +40,12 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Override
 	public void run(String... args) throws Exception {
+		
+		// trava de segurança para a inserção dos valores no banco
+		if (editoraRepository.count() > 0) {
+			return;
+		}
+		
 	    Autor a1 = new Autor(null, "Machado de Assis", "Brasileira");
 	    Autor a2 = new Autor(null, "Gabriel García Márquez", "Colombiana");
 	    Autor a3 = new Autor(null, "J.K. Rowling", "Britânica");
