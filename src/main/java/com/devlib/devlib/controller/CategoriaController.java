@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devlib.devlib.dto.insert.CategoriaInsertDTO;
+import com.devlib.devlib.dto.response.CategoriaResponseDTO;
 import com.devlib.devlib.dto.update.CategoriaUpdateDTO;
-import com.devlib.devlib.entites.Categoria;
 import com.devlib.devlib.services.CategoriaService;
 
 import jakarta.validation.Valid;
@@ -30,24 +30,24 @@ public class CategoriaController {
 	private CategoriaService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Categoria>> findAll(){
-		List<Categoria> categorias = service.findAll();
+	public ResponseEntity<List<CategoriaResponseDTO>> findAll(){
+		List<CategoriaResponseDTO> categorias = service.findAll();
 		return ResponseEntity.ok().body(categorias);
 	}
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Categoria> findById(@PathVariable Long id){
-		Categoria categoria = service.findById(id);
+	public ResponseEntity<CategoriaResponseDTO> findById(@PathVariable Long id){
+		CategoriaResponseDTO categoria = service.findById(id);
 		return ResponseEntity.ok().body(categoria);
 	}
 	@PostMapping
-	public ResponseEntity<Categoria> insert(@Valid @RequestBody CategoriaInsertDTO categoriaDTO){
-		Categoria categoria = service.insert(categoriaDTO);
+	public ResponseEntity<CategoriaResponseDTO> insert(@Valid @RequestBody CategoriaInsertDTO categoriaDTO){
+		CategoriaResponseDTO categoria = service.insert(categoriaDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(categoria.getId()).toUri();
 		return ResponseEntity.created(uri).body(categoria);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Categoria> update(@PathVariable Long id, @Valid @RequestBody CategoriaUpdateDTO entity){
-		Categoria categoria = service.update(id, entity);
+	public ResponseEntity<CategoriaResponseDTO> update(@PathVariable Long id, @Valid @RequestBody CategoriaUpdateDTO entity){
+		CategoriaResponseDTO categoria = service.update(id, entity);
 		return ResponseEntity.ok().body(categoria);
 	}
 	@DeleteMapping(value = "/{id}")

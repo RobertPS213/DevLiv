@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devlib.devlib.dto.insert.CategoriaInsertDTO;
+import com.devlib.devlib.dto.response.CategoriaResponseDTO;
 import com.devlib.devlib.dto.update.CategoriaUpdateDTO;
 import com.devlib.devlib.entites.Categoria;
 import com.devlib.devlib.repositories.CategoriaRepository;
@@ -22,25 +23,30 @@ public class CategoriaService {
 	@Autowired
 	private LivroRepository livroRepository;
 	
-	public List<Categoria> findAll(){
-		return repository.findAll();
+	public List<CategoriaResponseDTO> findAll(){
+		return CategoriaResponseDTO.toResponseDTOList(repository.findAll());
 	}
-	public Categoria findById(Long id) {
+	public CategoriaResponseDTO findById(Long id) {
 		Categoria categoria = repository.findById(id)
 				.orElseThrow(() -> new CategoriaNotFoundException(id));
-		return categoria;
+		CategoriaResponseDTO categoriaReturn = CategoriaResponseDTO.toResponseDTO(categoria);
+		return categoriaReturn;
 	}
-	public Categoria insert(CategoriaInsertDTO categoriaDTO) {
+	public CategoriaResponseDTO insert(CategoriaInsertDTO categoriaDTO) {
 		Categoria categoria = new Categoria();
 		categoria.setTitulo(categoriaDTO.getTitulo());
 		categoria.setDescricao(categoriaDTO.getDescricao());
-		return repository.save(categoria);
+		repository.save(categoria);
+		CategoriaResponseDTO categoriaReturn = CategoriaResponseDTO.toResponseDTO(categoria);
+		return categoriaReturn;
 	}
-	public Categoria update(Long id, CategoriaUpdateDTO entity) {
+	public CategoriaResponseDTO update(Long id, CategoriaUpdateDTO entity) {
 		Categoria categoria = repository.findById(id)
 				.orElseThrow(() -> new CategoriaNotFoundException(id));
 		updateData(categoria, entity);
-		return repository.save(categoria);
+		repository.save(categoria);
+		CategoriaResponseDTO categoriaReturn = CategoriaResponseDTO.toResponseDTO(categoria);
+		return categoriaReturn;
 	}
 	public void updateData(Categoria categoria, CategoriaUpdateDTO entity) {
 		categoria.setTitulo(entity.getTitulo());
