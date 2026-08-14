@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devlib.devlib.DTO.LivroInsertDTO;
-import com.devlib.devlib.DTO.LivroUpdateDTO;
+import com.devlib.devlib.dto.insert.LivroInsertDTO;
+import com.devlib.devlib.dto.update.LivroUpdateDTO;
 import com.devlib.devlib.entites.Livro;
 import com.devlib.devlib.services.LivroService;
 

@@ -1,4 +1,4 @@
-package com.devlib.devlib.DTO;
+package com.devlib.devlib.dto.update;
 
 import jakarta.validation.constraints.NotBlank;
 

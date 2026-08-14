@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devlib.devlib.DTO.AutorInsertDTO;
-import com.devlib.devlib.DTO.AutorUpdateDTO;
-import com.devlib.devlib.entites.Autor;
+import com.devlib.devlib.dto.insert.AutorInsertDTO;
+import com.devlib.devlib.dto.response.AutorResponseDTO;
+import com.devlib.devlib.dto.update.AutorUpdateDTO;
 import com.devlib.devlib.services.AutorService;
 
 import jakarta.validation.Valid;
@@ -30,24 +30,24 @@ public class AutorController {
 	private AutorService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Autor>> findAll(){
-		List<Autor> autores = service.findAll();
-		return ResponseEntity.ok().body(autores);
+	public ResponseEntity<List<AutorResponseDTO>> findAll(){
+		List<AutorResponseDTO> autoresDTO = service.findAll();
+		return ResponseEntity.ok().body(autoresDTO);
 	}
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Autor> findById(@PathVariable Long id){
-		Autor autor = service.findById(id);
-		return ResponseEntity.ok().body(autor);
+	public ResponseEntity<AutorResponseDTO> findById(@PathVariable Long id){
+		AutorResponseDTO autorDTO = service.findById(id);
+		return ResponseEntity.ok().body(autorDTO);
 	}
 	@PostMapping
-	public ResponseEntity<Autor> insert(@Valid @RequestBody AutorInsertDTO autorDTO){
-		Autor autor = service.insert(autorDTO);
+	public ResponseEntity<AutorResponseDTO> insert(@Valid @RequestBody AutorInsertDTO autorDTO){
+		AutorResponseDTO autor = service.insert(autorDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(autor.getId()).toUri();
 		return ResponseEntity.created(uri).body(autor);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Autor> update(@PathVariable Long id, @Valid @RequestBody AutorUpdateDTO entity){
-		Autor autor = service.update(id, entity);
+	public ResponseEntity<AutorResponseDTO> update(@PathVariable Long id, @Valid @RequestBody AutorUpdateDTO entity){
+		AutorResponseDTO autor = service.update(id, entity);
 		return ResponseEntity.ok().body(autor);
 	}
 	@DeleteMapping(value = "/{id}")

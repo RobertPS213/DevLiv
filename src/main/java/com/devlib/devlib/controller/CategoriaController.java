@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devlib.devlib.DTO.CategoriaInsertDTO;
-import com.devlib.devlib.DTO.CategoriaUpdateDTO;
+import com.devlib.devlib.dto.insert.CategoriaInsertDTO;
+import com.devlib.devlib.dto.update.CategoriaUpdateDTO;
 import com.devlib.devlib.entites.Categoria;
 import com.devlib.devlib.services.CategoriaService;
 

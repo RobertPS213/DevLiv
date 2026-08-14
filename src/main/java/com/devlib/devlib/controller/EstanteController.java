@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devlib.devlib.DTO.EstanteInsertDTO;
-import com.devlib.devlib.DTO.EstanteUpdateDTO;
+import com.devlib.devlib.dto.insert.EstanteInsertDTO;
+import com.devlib.devlib.dto.update.EstanteUpdateDTO;
 import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.services.EstanteService;
 

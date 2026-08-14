@@ -1,18 +1,18 @@
-package com.devlib.devlib.DTO;
+package com.devlib.devlib.dto.update;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class AutorInsertDTO {
+public class AutorUpdateDTO {
 
 	@NotBlank(message = "O nome deve ser preenchido")
 	private String nome;
 	@NotBlank(message = "A nacionalidade deve ser preenchida")
 	private String nacionalidade;
 	
-	public AutorInsertDTO() {
+	public AutorUpdateDTO() {
 		
 	}
-	public AutorInsertDTO(String nome, String nacionalidade) {
+	public AutorUpdateDTO(String nome, String nacionalidade) {
 		this.nome = nome;
 		this.nacionalidade = nacionalidade;
 	}

@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.devlib.devlib.DTO.AutorInsertDTO;
-import com.devlib.devlib.DTO.AutorUpdateDTO;
+import com.devlib.devlib.dto.insert.AutorInsertDTO;
+import com.devlib.devlib.dto.response.AutorResponseDTO;
+import com.devlib.devlib.dto.update.AutorUpdateDTO;
 import com.devlib.devlib.entites.Autor;
 import com.devlib.devlib.repositories.AutorRepository;
 import com.devlib.devlib.repositories.LivroRepository;
@@ -22,25 +23,30 @@ public class AutorService {
 	@Autowired
 	private LivroRepository livroRepository;
 	
-	public List<Autor> findAll() {
-		return repository.findAll();
+	public List<AutorResponseDTO> findAll() {
+		return AutorResponseDTO.toResponseDTOList(repository.findAll());
 	}
-	public Autor findById(Long id) {
+	public AutorResponseDTO findById(Long id) {
 		Autor autor = repository.findById(id)
 				.orElseThrow(() -> new AutorNotFoundException(id));
-		return autor;
+		AutorResponseDTO autorReturn = AutorResponseDTO.toResponseDTO(autor);
+		return autorReturn;
 	}
-	public Autor insert(AutorInsertDTO autorDTO) {
+	public AutorResponseDTO insert(AutorInsertDTO autorDTO) {
 		Autor autor = new Autor();
 		autor.setNome(autorDTO.getNome());
 		autor.setNacionalidade(autorDTO.getNacionalidade());
-	    return repository.save(autor);
+	    repository.save(autor);
+	    AutorResponseDTO autorReturn = AutorResponseDTO.toResponseDTO(autor);
+	    return autorReturn;
 	}
-	public Autor update(Long id, AutorUpdateDTO entity) {
+	public AutorResponseDTO update(Long id, AutorUpdateDTO entity) {
 		Autor autor = repository.findById(id)
 				.orElseThrow(() -> new AutorNotFoundException(id));
 		updateData(autor, entity);
-		return repository.save(autor);
+		repository.save(autor);
+		AutorResponseDTO autorReturn = AutorResponseDTO.toResponseDTO(autor);
+		return autorReturn;
 	}
 	public void updateData(Autor autor, AutorUpdateDTO entity) {
 		autor.setNome(entity.getNome());

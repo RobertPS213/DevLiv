@@ -1,10 +1,14 @@
-package com.devlib.devlib.DTO;
+package com.devlib.devlib.dto.insert;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-public class LivroUpdateDTO {
-
+public class LivroInsertDTO {
+	
 	@NotBlank(message = "O titulo deve ser preenchido")
 	private String titulo;
 	@NotBlank(message = "O ISBN deve ser preenchido")
@@ -17,18 +21,24 @@ public class LivroUpdateDTO {
 	private Long editoraId;
 	@NotNull(message = "O ID da estante não pode ser nulo")
 	private Long estanteId;
+	@NotEmpty(message = "O livro precisa ter pelo menos um autor")
+	private Set<@NotNull(message = "O autor não pode ser nulo")Long> autoresId = new HashSet<>();
+	@NotEmpty(message = "O livro precisa ter pelo menos uma categoria")
+	private Set<@NotNull(message = "A categoria não pode ser nula")Long> categoriasId = new HashSet<>();
 	
-	public LivroUpdateDTO() {
+	public LivroInsertDTO() {
 		
 	}
-	public LivroUpdateDTO(String titulo, String isbn, Integer anoPublicacao, Integer numeroPaginas, Long editoraId,
-			Long estanteId) {
+	public LivroInsertDTO(String titulo, String isbn, Integer anoPublicacao, Integer numeroPaginas,
+			Long editoraId, Long estanteId, Set<Long> autoresId, Set<Long> categoriasId) {
 		this.titulo = titulo;
 		this.isbn = isbn;
 		this.anoPublicacao = anoPublicacao;
 		this.numeroPaginas = numeroPaginas;
 		this.editoraId = editoraId;
 		this.estanteId = estanteId;
+		this.autoresId = autoresId;
+		this.categoriasId = categoriasId;
 	}
 	public String getTitulo() {
 		return titulo;
@@ -66,4 +76,11 @@ public class LivroUpdateDTO {
 	public void setEstanteId(Long estanteId) {
 		this.estanteId = estanteId;
 	}
+	public Set<Long> getAutoresId() {
+		return autoresId;
+	}
+	public Set<Long> getCategoriasId() {
+		return categoriasId;
+	}
+	
 }

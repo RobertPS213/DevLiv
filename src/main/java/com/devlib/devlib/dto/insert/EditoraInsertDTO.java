@@ -1,8 +1,8 @@
-package com.devlib.devlib.DTO;
+package com.devlib.devlib.dto.insert;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class EditoraUpdateDTO {
+public class EditoraInsertDTO {
 
 	@NotBlank(message = "O nome deve ser preenchido")
 	private String nome;
@@ -11,10 +11,10 @@ public class EditoraUpdateDTO {
 	@NotBlank(message = "O email deve ser preenchido")
 	private String email;
 	
-	public EditoraUpdateDTO() {
+	public EditoraInsertDTO() {
 		
 	}
-	public EditoraUpdateDTO(String nome, String cnpj, String email) {
+	public EditoraInsertDTO(String nome, String cnpj, String email) {
 		this.nome = nome;
 		this.cnpj = cnpj;
 		this.email = email;

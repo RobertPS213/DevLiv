@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.devlib.devlib.DTO.EditoraInsertDTO;
-import com.devlib.devlib.DTO.EditoraUpdateDTO;
+import com.devlib.devlib.dto.insert.EditoraInsertDTO;
+import com.devlib.devlib.dto.update.EditoraUpdateDTO;
 import com.devlib.devlib.entites.Editora;
 import com.devlib.devlib.services.EditoraService;
 

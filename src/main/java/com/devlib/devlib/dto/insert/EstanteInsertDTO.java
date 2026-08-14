@@ -1,9 +1,9 @@
-package com.devlib.devlib.DTO;
+package com.devlib.devlib.dto.insert;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-public class EstanteUpdateDTO {
+public class EstanteInsertDTO {
 
 	@NotBlank(message = "O codigo deve ser preenchido")
 	private String codigo;
@@ -12,10 +12,10 @@ public class EstanteUpdateDTO {
 	@NotNull(message = "A capacidade não pode ser nula")
 	private Integer capacidade;
 	
-	public EstanteUpdateDTO() {
+	public EstanteInsertDTO() {
 		
 	}
-	public EstanteUpdateDTO(String codigo,String localizacao,Integer capacidade) {
+	public EstanteInsertDTO(String codigo, String localizacao, Integer capacidade) {
 		this.codigo = codigo;
 		this.localizacao = localizacao;
 		this.capacidade = capacidade;

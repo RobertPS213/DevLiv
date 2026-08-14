@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.devlib.devlib.DTO.EstanteInsertDTO;
-import com.devlib.devlib.DTO.EstanteUpdateDTO;
+import com.devlib.devlib.dto.insert.EstanteInsertDTO;
+import com.devlib.devlib.dto.update.EstanteUpdateDTO;
 import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.repositories.EstanteRepository;
 import com.devlib.devlib.repositories.LivroRepository;

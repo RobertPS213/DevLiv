@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.devlib.devlib.DTO.EditoraInsertDTO;
-import com.devlib.devlib.DTO.EditoraUpdateDTO;
+import com.devlib.devlib.dto.insert.EditoraInsertDTO;
+import com.devlib.devlib.dto.update.EditoraUpdateDTO;
 import com.devlib.devlib.entites.Editora;
 import com.devlib.devlib.repositories.EditoraRepository;
 import com.devlib.devlib.repositories.LivroRepository;
