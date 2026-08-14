@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devlib.devlib.dto.insert.EditoraInsertDTO;
+import com.devlib.devlib.dto.response.EditoraResponseDTO;
 import com.devlib.devlib.dto.update.EditoraUpdateDTO;
 import com.devlib.devlib.entites.Editora;
 import com.devlib.devlib.repositories.EditoraRepository;
@@ -22,26 +23,31 @@ public class EditoraService {
 	@Autowired
 	private LivroRepository livroRepository;
 	
-	public List<Editora> findAll(){
-		return repository.findAll();
+	public List<EditoraResponseDTO> findAll(){
+		return EditoraResponseDTO.toResponseDTOList(repository.findAll());
 	}
-	public Editora findById(Long id) {
+	public EditoraResponseDTO findById(Long id) {
 		Editora editora = repository.findById(id)
 				.orElseThrow(() -> new EditoraNotFoundException(id));
-		return editora;
+		EditoraResponseDTO editoraReturn = EditoraResponseDTO.toResponseDTO(editora);
+		return editoraReturn;
 	}
-	public Editora insert(EditoraInsertDTO editoraDTO) {
+	public EditoraResponseDTO insert(EditoraInsertDTO editoraDTO) {
 		Editora editora = new Editora();
 		editora.setNome(editoraDTO.getNome());
 		editora.setCnpj(editoraDTO.getCnpj());
 		editora.setEmail(editoraDTO.getEmail());
-		return repository.save(editora);
+		repository.save(editora);
+		EditoraResponseDTO editoraReturn = EditoraResponseDTO.toResponseDTO(editora);
+		return editoraReturn;
 	}
-	public Editora update(Long id, EditoraUpdateDTO entity) {
+	public EditoraResponseDTO update(Long id, EditoraUpdateDTO entity) {
 		Editora editora = repository.findById(id)
 				.orElseThrow(() -> new EditoraNotFoundException(id));
 		updateData(editora, entity);
-		return repository.save(editora);
+		repository.save(editora);
+		EditoraResponseDTO editoraReturn = EditoraResponseDTO.toResponseDTO(editora);
+		return editoraReturn;
 	}
 	public void updateData(Editora editora, EditoraUpdateDTO entity) {
 		editora.setNome(entity.getNome());

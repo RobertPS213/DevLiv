@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devlib.devlib.dto.insert.EditoraInsertDTO;
+import com.devlib.devlib.dto.response.EditoraResponseDTO;
 import com.devlib.devlib.dto.update.EditoraUpdateDTO;
-import com.devlib.devlib.entites.Editora;
 import com.devlib.devlib.services.EditoraService;
 
 import jakarta.validation.Valid;
@@ -30,24 +30,24 @@ public class EditoraController {
 	private EditoraService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Editora>> findAll(){
-		List<Editora> editoras = service.findAll();
+	public ResponseEntity<List<EditoraResponseDTO>> findAll(){
+		List<EditoraResponseDTO> editoras = service.findAll();
 		return ResponseEntity.ok().body(editoras);
 	}
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Editora> findById(@PathVariable Long id){
-		Editora editora = service.findById(id);
+	public ResponseEntity<EditoraResponseDTO> findById(@PathVariable Long id){
+		EditoraResponseDTO editora = service.findById(id);
 		return ResponseEntity.ok().body(editora);
 	}
 	@PostMapping
-	public ResponseEntity<Editora> insert(@Valid @RequestBody EditoraInsertDTO editoraDTO){
-		Editora editora = service.insert(editoraDTO);
+	public ResponseEntity<EditoraResponseDTO> insert(@Valid @RequestBody EditoraInsertDTO editoraDTO){
+		EditoraResponseDTO editora = service.insert(editoraDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(editora.getId()).toUri();
 		return ResponseEntity.created(uri).body(editora);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Editora> update(@PathVariable Long id, @Valid @RequestBody EditoraUpdateDTO entity){
-		Editora editora = service.update(id, entity);
+	public ResponseEntity<EditoraResponseDTO> update(@PathVariable Long id, @Valid @RequestBody EditoraUpdateDTO entity){
+		EditoraResponseDTO editora = service.update(id, entity);
 		return ResponseEntity.ok().body(editora);
 	}
 	@DeleteMapping(value = "/{id}")
