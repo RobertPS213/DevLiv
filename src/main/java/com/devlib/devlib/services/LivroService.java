@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devlib.devlib.dto.insert.LivroInsertDTO;
+import com.devlib.devlib.dto.response.LivroResponseDTO;
 import com.devlib.devlib.dto.update.LivroUpdateDTO;
 import com.devlib.devlib.entites.Autor;
 import com.devlib.devlib.entites.Categoria;
@@ -48,15 +49,16 @@ public class LivroService {
 	@Autowired
 	private EstanteRepository estanteRepository;
 	
-	public List<Livro> findAll(){
-		return repository.findAll();
+	public List<LivroResponseDTO> findAll(){
+		return LivroResponseDTO.toResponseDTOList(repository.findAll());
 	}
-	public Livro findById(Long id) {
+	public LivroResponseDTO findById(Long id) {
 		Livro livro = repository.findById(id)
 				.orElseThrow(() -> new LivroNotFoundException(id));
-		return livro;
+		LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
+		return livroReturn;
 	}
-	public Livro insert(LivroInsertDTO livroDTO) {
+	public LivroResponseDTO insert(LivroInsertDTO livroDTO) {
 		Livro livro = new Livro();
 		livro.setTitulo(livroDTO.getTitulo());
 		livro.setIsbn(livroDTO.getIsbn());
@@ -76,13 +78,17 @@ public class LivroService {
 		List<Categoria> listaCategoria = categoriaRepository.findAllById(livroDTO.getCategoriasId());
 		validationIdCategorias(idsCatRecebidos, listaCategoria);
 		livro.getCategorias().addAll(listaCategoria);
-		return repository.save(livro);
+		repository.save(livro);
+		LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
+		return livroReturn;
 	}
-	public Livro update(Long id, LivroUpdateDTO entity) {
+	public LivroResponseDTO update(Long id, LivroUpdateDTO entity) {
 		Livro livro = repository.findById(id)
 				.orElseThrow(() -> new LivroNotFoundException(id));
 		updateData(livro, entity);
-		return repository.save(livro);
+		repository.save(livro);
+		LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
+		return livroReturn;
 	}
 	public void updateData(Livro livro, LivroUpdateDTO entity) {
 		livro.setTitulo(entity.getTitulo());
@@ -96,7 +102,7 @@ public class LivroService {
 				.orElseThrow(() -> new EstanteNotFoundException(entity.getEstanteId()));
 		livro.setEstante(estante);
 	}
-	public Livro adicionarAutor(Long livroId, Long autorId) {
+	public LivroResponseDTO adicionarAutor(Long livroId, Long autorId) {
 		Livro livro = repository.findById(livroId)
 	            .orElseThrow(() -> new LivroNotFoundException(livroId));
 	    Autor autor = autorRepository.findById(autorId)
@@ -105,9 +111,11 @@ public class LivroService {
 	        throw new AutorAlreadyAssociatedException(livroId);
 	    }
 	    livro.getAutores().add(autor);
-	    return repository.save(livro);
+	    repository.save(livro);
+	    LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
+	    return livroReturn;
 	}
-	public Livro removerAutor(Long livroId, Long autorId) {
+	public LivroResponseDTO removerAutor(Long livroId, Long autorId) {
 		Livro livro = repository.findById(livroId)
 	            .orElseThrow(() -> new LivroNotFoundException(livroId));
 
@@ -117,9 +125,11 @@ public class LivroService {
 	        throw new AutorNotAssociatedException();
 	    }
 	    livro.getAutores().remove(autor);
-	    return repository.save(livro);
+	    repository.save(livro);
+	    LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
+	    return livroReturn;
 	}
-	public Livro adicionarCategoria(Long livroId, Long categoriaId) {
+	public LivroResponseDTO adicionarCategoria(Long livroId, Long categoriaId) {
 		Livro livro = repository.findById(livroId)
 	            .orElseThrow(() -> new LivroNotFoundException(livroId));
 		Categoria categoria = categoriaRepository.findById(categoriaId)
@@ -128,9 +138,11 @@ public class LivroService {
 			throw new CategoriaAlreadyAssociatedException();
 		}
 	    livro.getCategorias().add(categoria);
-	    return repository.save(livro);
+	    repository.save(livro);
+	    LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
+	    return livroReturn;
 	}
-	public Livro removerCategoria(Long livroId, Long categoriaId) {
+	public LivroResponseDTO removerCategoria(Long livroId, Long categoriaId) {
 		Livro livro = repository.findById(livroId)
 	            .orElseThrow(() -> new LivroNotFoundException(livroId));
 	    Categoria categoria = categoriaRepository.findById(categoriaId)
@@ -139,7 +151,9 @@ public class LivroService {
 	        throw new CategoriaNotAssociatedException();
 	    }
 	    livro.getCategorias().remove(categoria);
-	    return repository.save(livro);
+	    repository.save(livro);
+	    LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
+	    return livroReturn;
 	}
 	public void delete(Long id) {
 		if(!repository.existsById(id)) throw new LivroNotFoundException(id);

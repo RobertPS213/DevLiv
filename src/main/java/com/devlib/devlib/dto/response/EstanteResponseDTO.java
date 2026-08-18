@@ -16,7 +16,6 @@ public class EstanteResponseDTO {
 		
 	}
 	public EstanteResponseDTO(Long id, String codigo, String localizacao, Integer capacidade) {
-		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.localizacao = localizacao;

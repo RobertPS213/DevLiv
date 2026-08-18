@@ -17,7 +17,6 @@ public class EditoraResponseDTO {
 	}
 
 	public EditoraResponseDTO(Long id, String nome, String cnpj, String email) {
-		super();
 		this.id = id;
 		this.nome = nome;
 		this.cnpj = cnpj;

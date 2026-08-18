@@ -15,7 +15,6 @@ public class CategoriaResponseDTO {
 		
 	}
 	public CategoriaResponseDTO(Long id, String titulo, String descricao) {
-		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;

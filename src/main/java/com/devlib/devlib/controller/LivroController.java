@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devlib.devlib.dto.insert.LivroInsertDTO;
+import com.devlib.devlib.dto.response.LivroResponseDTO;
 import com.devlib.devlib.dto.update.LivroUpdateDTO;
-import com.devlib.devlib.entites.Livro;
 import com.devlib.devlib.services.LivroService;
 
 import jakarta.validation.Valid;
@@ -30,44 +30,44 @@ public class LivroController {
 	private LivroService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Livro>> findAll(){
-		List<Livro> livros = service.findAll();
+	public ResponseEntity<List<LivroResponseDTO>> findAll(){
+		List<LivroResponseDTO> livros = service.findAll();
 		return ResponseEntity.ok().body(livros);
 	}
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Livro> findById(@PathVariable Long id){
-		Livro livro = service.findById(id);
+	public ResponseEntity<LivroResponseDTO> findById(@PathVariable Long id){
+		LivroResponseDTO livro = service.findById(id);
 		return ResponseEntity.ok().body(livro);
 	}
 	@PostMapping
-	public ResponseEntity<Livro> insert(@Valid @RequestBody LivroInsertDTO livroDTO){
-		Livro livroRecebido = service.insert(livroDTO);
+	public ResponseEntity<LivroResponseDTO> insert(@Valid @RequestBody LivroInsertDTO livroDTO){
+		LivroResponseDTO livroRecebido = service.insert(livroDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(livroRecebido.getId()).toUri();
 		return ResponseEntity.created(uri).body(livroRecebido);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Livro> update(@PathVariable Long id, @Valid @RequestBody LivroUpdateDTO entity){
-		Livro livro = service.update(id, entity);
+	public ResponseEntity<LivroResponseDTO> update(@PathVariable Long id, @Valid @RequestBody LivroUpdateDTO entity){
+		LivroResponseDTO livro = service.update(id, entity);
 		return ResponseEntity.ok().body(livro);
 	}
 	@PostMapping(value = "/{livroId}/autores/{autorId}")
-	public ResponseEntity<Livro> adicionarAutores(@PathVariable Long livroId, @PathVariable Long autorId){
-		Livro livro = service.adicionarAutor(livroId, autorId);
+	public ResponseEntity<LivroResponseDTO> adicionarAutores(@PathVariable Long livroId, @PathVariable Long autorId){
+		LivroResponseDTO livro = service.adicionarAutor(livroId, autorId);
 		return ResponseEntity.ok().body(livro);
 	}
 	@DeleteMapping(value = "/{livroId}/autores/{autorId}")
-	public ResponseEntity<Livro> removerAutores(@PathVariable Long livroId, @PathVariable Long autorId){
-		Livro livro = service.removerAutor(livroId, autorId);
+	public ResponseEntity<LivroResponseDTO> removerAutores(@PathVariable Long livroId, @PathVariable Long autorId){
+		LivroResponseDTO livro = service.removerAutor(livroId, autorId);
 		return ResponseEntity.ok().body(livro);
 	}
 	@PostMapping(value = "/{livroId}/categorias/{categoriaId}")
-	public ResponseEntity<Livro> adicionarCategoria(@PathVariable Long livroId, @PathVariable Long categoriaId){
-		Livro livro = service.adicionarCategoria(livroId, categoriaId);
+	public ResponseEntity<LivroResponseDTO> adicionarCategoria(@PathVariable Long livroId, @PathVariable Long categoriaId){
+		LivroResponseDTO livro = service.adicionarCategoria(livroId, categoriaId);
 		return ResponseEntity.ok().body(livro);
 	}
 	@DeleteMapping(value = "/{livroId}/categorias/{categoriaId}")
-	public ResponseEntity<Livro> removeCategoria(@PathVariable Long livroId, @PathVariable Long categoriaId){
-		Livro livro = service.removerCategoria(livroId, categoriaId);
+	public ResponseEntity<LivroResponseDTO> removeCategoria(@PathVariable Long livroId, @PathVariable Long categoriaId){
+		LivroResponseDTO livro = service.removerCategoria(livroId, categoriaId);
 		return ResponseEntity.ok().body(livro);
 	}
 	@DeleteMapping(value = "/{id}")
