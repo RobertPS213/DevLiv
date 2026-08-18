@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devlib.devlib.dto.insert.EstanteInsertDTO;
+import com.devlib.devlib.dto.response.EstanteResponseDTO;
 import com.devlib.devlib.dto.update.EstanteUpdateDTO;
-import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.services.EstanteService;
 
 import jakarta.validation.Valid;
@@ -30,24 +30,24 @@ public class EstanteController {
 	private EstanteService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Estante>> findAll(){
-		List<Estante> estante = service.findAll();
+	public ResponseEntity<List<EstanteResponseDTO>> findAll(){
+		List<EstanteResponseDTO> estante = service.findAll();
 		return ResponseEntity.ok().body(estante);
 	}
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Estante> findById(@PathVariable Long id){
-		Estante estante = service.findById(id);
+	public ResponseEntity<EstanteResponseDTO> findById(@PathVariable Long id){
+		EstanteResponseDTO estante = service.findById(id);
 		return ResponseEntity.ok().body(estante);
 	}
 	@PostMapping
-	public ResponseEntity<Estante> insert(@Valid @RequestBody EstanteInsertDTO estanteDTO){
-		Estante estante = service.insert(estanteDTO);
+	public ResponseEntity<EstanteResponseDTO> insert(@Valid @RequestBody EstanteInsertDTO estanteDTO){
+		EstanteResponseDTO estante = service.insert(estanteDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(estante.getId()).toUri();
 		return ResponseEntity.created(uri).body(estante);
 	}
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Estante> update(@PathVariable Long id, @Valid @RequestBody EstanteUpdateDTO entity){
-		Estante estante = service.update(id, entity);
+	public ResponseEntity<EstanteResponseDTO> update(@PathVariable Long id, @Valid @RequestBody EstanteUpdateDTO entity){
+		EstanteResponseDTO estante = service.update(id, entity);
 		return ResponseEntity.ok().body(estante);
 	}
 	@DeleteMapping(value = "/{id}")

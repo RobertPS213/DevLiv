@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.devlib.devlib.dto.insert.EstanteInsertDTO;
+import com.devlib.devlib.dto.response.EstanteResponseDTO;
 import com.devlib.devlib.dto.update.EstanteUpdateDTO;
 import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.repositories.EstanteRepository;
@@ -22,26 +23,31 @@ public class EstanteService {
 	@Autowired
 	private LivroRepository livroRepository;
 	
-	public List<Estante> findAll(){
-		return repository.findAll();
+	public List<EstanteResponseDTO> findAll(){
+		return EstanteResponseDTO.toResponseDTOList(repository.findAll());
 	}
-	public Estante findById(Long id) {
+	public EstanteResponseDTO findById(Long id) {
 		Estante estante = repository.findById(id)
 				.orElseThrow(() -> new EstanteNotFoundException(id));
-		return estante;
+		EstanteResponseDTO estanteReturn = EstanteResponseDTO.toResponseDTO(estante);
+		return estanteReturn;
 	}
-	public Estante insert(EstanteInsertDTO estanteDTO) {
+	public EstanteResponseDTO insert(EstanteInsertDTO estanteDTO) {
 		Estante estante = new Estante();
 		estante.setCodigo(estanteDTO.getCodigo());
 		estante.setLocalizacao(estanteDTO.getLocalizacao());
 		estante.setCapacidade(estanteDTO.getCapacidade());
-		return repository.save(estante);
+		repository.save(estante);
+		EstanteResponseDTO estanteReturn = EstanteResponseDTO.toResponseDTO(estante);
+		return estanteReturn;
 	}
-	public Estante update(Long id, EstanteUpdateDTO entity) {
+	public EstanteResponseDTO update(Long id, EstanteUpdateDTO entity) {
 		Estante estante = repository.findById(id)
 				.orElseThrow(() -> new EstanteNotFoundException(id));
 		updateData(estante, entity);
-		return repository.save(estante);
+		repository.save(estante);
+		EstanteResponseDTO estanteReturn = EstanteResponseDTO.toResponseDTO(estante);
+		return estanteReturn;
 	}
 	public void updateData(Estante estante, EstanteUpdateDTO entity) {
 		estante.setCodigo(entity.getCodigo());
