@@ -29,24 +29,21 @@ public class CategoriaService {
 	public CategoriaResponseDTO findById(Long id) {
 		Categoria categoria = repository.findById(id)
 				.orElseThrow(() -> new CategoriaNotFoundException(id));
-		CategoriaResponseDTO categoriaReturn = CategoriaResponseDTO.toResponseDTO(categoria);
-		return categoriaReturn;
+		return CategoriaResponseDTO.toResponseDTO(categoria);
 	}
 	public CategoriaResponseDTO insert(CategoriaInsertDTO categoriaDTO) {
 		Categoria categoria = new Categoria();
 		categoria.setTitulo(categoriaDTO.getTitulo());
 		categoria.setDescricao(categoriaDTO.getDescricao());
 		repository.save(categoria);
-		CategoriaResponseDTO categoriaReturn = CategoriaResponseDTO.toResponseDTO(categoria);
-		return categoriaReturn;
+		return CategoriaResponseDTO.toResponseDTO(categoria);
 	}
 	public CategoriaResponseDTO update(Long id, CategoriaUpdateDTO entity) {
 		Categoria categoria = repository.findById(id)
 				.orElseThrow(() -> new CategoriaNotFoundException(id));
 		updateData(categoria, entity);
 		repository.save(categoria);
-		CategoriaResponseDTO categoriaReturn = CategoriaResponseDTO.toResponseDTO(categoria);
-		return categoriaReturn;
+		return CategoriaResponseDTO.toResponseDTO(categoria);
 	}
 	public void updateData(Categoria categoria, CategoriaUpdateDTO entity) {
 		categoria.setTitulo(entity.getTitulo());

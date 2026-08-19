@@ -29,8 +29,7 @@ public class EstanteService {
 	public EstanteResponseDTO findById(Long id) {
 		Estante estante = repository.findById(id)
 				.orElseThrow(() -> new EstanteNotFoundException(id));
-		EstanteResponseDTO estanteReturn = EstanteResponseDTO.toResponseDTO(estante);
-		return estanteReturn;
+		return EstanteResponseDTO.toResponseDTO(estante);
 	}
 	public EstanteResponseDTO insert(EstanteInsertDTO estanteDTO) {
 		Estante estante = new Estante();
@@ -38,16 +37,14 @@ public class EstanteService {
 		estante.setLocalizacao(estanteDTO.getLocalizacao());
 		estante.setCapacidade(estanteDTO.getCapacidade());
 		repository.save(estante);
-		EstanteResponseDTO estanteReturn = EstanteResponseDTO.toResponseDTO(estante);
-		return estanteReturn;
+		return EstanteResponseDTO.toResponseDTO(estante);
 	}
 	public EstanteResponseDTO update(Long id, EstanteUpdateDTO entity) {
 		Estante estante = repository.findById(id)
 				.orElseThrow(() -> new EstanteNotFoundException(id));
 		updateData(estante, entity);
 		repository.save(estante);
-		EstanteResponseDTO estanteReturn = EstanteResponseDTO.toResponseDTO(estante);
-		return estanteReturn;
+		return EstanteResponseDTO.toResponseDTO(estante);
 	}
 	public void updateData(Estante estante, EstanteUpdateDTO entity) {
 		estante.setCodigo(entity.getCodigo());

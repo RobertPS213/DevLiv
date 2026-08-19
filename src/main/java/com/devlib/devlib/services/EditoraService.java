@@ -29,8 +29,7 @@ public class EditoraService {
 	public EditoraResponseDTO findById(Long id) {
 		Editora editora = repository.findById(id)
 				.orElseThrow(() -> new EditoraNotFoundException(id));
-		EditoraResponseDTO editoraReturn = EditoraResponseDTO.toResponseDTO(editora);
-		return editoraReturn;
+		return EditoraResponseDTO.toResponseDTO(editora);
 	}
 	public EditoraResponseDTO insert(EditoraInsertDTO editoraDTO) {
 		Editora editora = new Editora();
@@ -38,16 +37,14 @@ public class EditoraService {
 		editora.setCnpj(editoraDTO.getCnpj());
 		editora.setEmail(editoraDTO.getEmail());
 		repository.save(editora);
-		EditoraResponseDTO editoraReturn = EditoraResponseDTO.toResponseDTO(editora);
-		return editoraReturn;
+		return EditoraResponseDTO.toResponseDTO(editora);
 	}
 	public EditoraResponseDTO update(Long id, EditoraUpdateDTO entity) {
 		Editora editora = repository.findById(id)
 				.orElseThrow(() -> new EditoraNotFoundException(id));
 		updateData(editora, entity);
 		repository.save(editora);
-		EditoraResponseDTO editoraReturn = EditoraResponseDTO.toResponseDTO(editora);
-		return editoraReturn;
+		return EditoraResponseDTO.toResponseDTO(editora);
 	}
 	public void updateData(Editora editora, EditoraUpdateDTO entity) {
 		editora.setNome(entity.getNome());

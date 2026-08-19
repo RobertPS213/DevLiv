@@ -55,8 +55,7 @@ public class LivroService {
 	public LivroResponseDTO findById(Long id) {
 		Livro livro = repository.findById(id)
 				.orElseThrow(() -> new LivroNotFoundException(id));
-		LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
-		return livroReturn;
+		return LivroResponseDTO.toResponseDTO(livro);
 	}
 	public LivroResponseDTO insert(LivroInsertDTO livroDTO) {
 		Livro livro = new Livro();
@@ -79,16 +78,14 @@ public class LivroService {
 		validationIdCategorias(idsCatRecebidos, listaCategoria);
 		livro.getCategorias().addAll(listaCategoria);
 		repository.save(livro);
-		LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
-		return livroReturn;
+		return LivroResponseDTO.toResponseDTO(livro);
 	}
 	public LivroResponseDTO update(Long id, LivroUpdateDTO entity) {
 		Livro livro = repository.findById(id)
 				.orElseThrow(() -> new LivroNotFoundException(id));
 		updateData(livro, entity);
 		repository.save(livro);
-		LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
-		return livroReturn;
+		return LivroResponseDTO.toResponseDTO(livro);
 	}
 	public void updateData(Livro livro, LivroUpdateDTO entity) {
 		livro.setTitulo(entity.getTitulo());
@@ -112,8 +109,7 @@ public class LivroService {
 	    }
 	    livro.getAutores().add(autor);
 	    repository.save(livro);
-	    LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
-	    return livroReturn;
+	    return LivroResponseDTO.toResponseDTO(livro);
 	}
 	public LivroResponseDTO removerAutor(Long livroId, Long autorId) {
 		Livro livro = repository.findById(livroId)
@@ -126,8 +122,7 @@ public class LivroService {
 	    }
 	    livro.getAutores().remove(autor);
 	    repository.save(livro);
-	    LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
-	    return livroReturn;
+	    return LivroResponseDTO.toResponseDTO(livro);
 	}
 	public LivroResponseDTO adicionarCategoria(Long livroId, Long categoriaId) {
 		Livro livro = repository.findById(livroId)
@@ -139,8 +134,7 @@ public class LivroService {
 		}
 	    livro.getCategorias().add(categoria);
 	    repository.save(livro);
-	    LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
-	    return livroReturn;
+	    return LivroResponseDTO.toResponseDTO(livro);
 	}
 	public LivroResponseDTO removerCategoria(Long livroId, Long categoriaId) {
 		Livro livro = repository.findById(livroId)
@@ -152,8 +146,7 @@ public class LivroService {
 	    }
 	    livro.getCategorias().remove(categoria);
 	    repository.save(livro);
-	    LivroResponseDTO livroReturn = LivroResponseDTO.toResponseDTO(livro);
-	    return livroReturn;
+	    return LivroResponseDTO.toResponseDTO(livro);
 	}
 	public void delete(Long id) {
 		if(!repository.existsById(id)) throw new LivroNotFoundException(id);

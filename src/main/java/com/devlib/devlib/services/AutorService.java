@@ -29,24 +29,21 @@ public class AutorService {
 	public AutorResponseDTO findById(Long id) {
 		Autor autor = repository.findById(id)
 				.orElseThrow(() -> new AutorNotFoundException(id));
-		AutorResponseDTO autorReturn = AutorResponseDTO.toResponseDTO(autor);
-		return autorReturn;
+		return AutorResponseDTO.toResponseDTO(autor);
 	}
 	public AutorResponseDTO insert(AutorInsertDTO autorDTO) {
 		Autor autor = new Autor();
 		autor.setNome(autorDTO.getNome());
 		autor.setNacionalidade(autorDTO.getNacionalidade());
 	    repository.save(autor);
-	    AutorResponseDTO autorReturn = AutorResponseDTO.toResponseDTO(autor);
-	    return autorReturn;
+	    return AutorResponseDTO.toResponseDTO(autor);
 	}
 	public AutorResponseDTO update(Long id, AutorUpdateDTO entity) {
 		Autor autor = repository.findById(id)
 				.orElseThrow(() -> new AutorNotFoundException(id));
 		updateData(autor, entity);
 		repository.save(autor);
-		AutorResponseDTO autorReturn = AutorResponseDTO.toResponseDTO(autor);
-		return autorReturn;
+		return AutorResponseDTO.toResponseDTO(autor);
 	}
 	public void updateData(Autor autor, AutorUpdateDTO entity) {
 		autor.setNome(entity.getNome());
