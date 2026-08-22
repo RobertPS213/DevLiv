@@ -35,8 +35,8 @@ public class AutorService {
 		Autor autor = new Autor();
 		autor.setNome(autorDTO.getNome());
 		autor.setNacionalidade(autorDTO.getNacionalidade());
-	    repository.save(autor);
-	    return AutorResponseDTO.toResponseDTO(autor);
+	    Autor autorSalvo = repository.save(autor);
+	    return AutorResponseDTO.toResponseDTO(autorSalvo);
 	}
 	public AutorResponseDTO update(Long id, AutorUpdateDTO entity) {
 		Autor autor = repository.findById(id)
