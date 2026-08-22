@@ -35,8 +35,8 @@ public class CategoriaService {
 		Categoria categoria = new Categoria();
 		categoria.setTitulo(categoriaDTO.getTitulo());
 		categoria.setDescricao(categoriaDTO.getDescricao());
-		repository.save(categoria);
-		return CategoriaResponseDTO.toResponseDTO(categoria);
+		Categoria categoriaSalva = repository.save(categoria);
+		return CategoriaResponseDTO.toResponseDTO(categoriaSalva);
 	}
 	public CategoriaResponseDTO update(Long id, CategoriaUpdateDTO entity) {
 		Categoria categoria = repository.findById(id)
@@ -50,8 +50,8 @@ public class CategoriaService {
 		categoria.setDescricao(entity.getDescricao());
 	}
 	public void delete(Long id) {
-		if(livroRepository.existsByCategoriasId(id)) throw new CategoriaDeletionException(id);
 		if(!repository.existsById(id)) throw new CategoriaNotFoundException(id);
+		if(livroRepository.existsByCategoriasId(id)) throw new CategoriaDeletionException(id);
 		repository.deleteById(id);
 	}
 }
