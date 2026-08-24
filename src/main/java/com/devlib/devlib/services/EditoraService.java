@@ -36,8 +36,8 @@ public class EditoraService {
 		editora.setNome(editoraDTO.getNome());
 		editora.setCnpj(editoraDTO.getCnpj());
 		editora.setEmail(editoraDTO.getEmail());
-		repository.save(editora);
-		return EditoraResponseDTO.toResponseDTO(editora);
+		Editora editoraSalva = repository.save(editora);
+		return EditoraResponseDTO.toResponseDTO(editoraSalva);
 	}
 	public EditoraResponseDTO update(Long id, EditoraUpdateDTO entity) {
 		Editora editora = repository.findById(id)
