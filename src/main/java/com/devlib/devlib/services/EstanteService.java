@@ -36,8 +36,8 @@ public class EstanteService {
 		estante.setCodigo(estanteDTO.getCodigo());
 		estante.setLocalizacao(estanteDTO.getLocalizacao());
 		estante.setCapacidade(estanteDTO.getCapacidade());
-		repository.save(estante);
-		return EstanteResponseDTO.toResponseDTO(estante);
+		Estante estanteSalva = repository.save(estante);
+		return EstanteResponseDTO.toResponseDTO(estanteSalva);
 	}
 	public EstanteResponseDTO update(Long id, EstanteUpdateDTO entity) {
 		Estante estante = repository.findById(id)
@@ -52,8 +52,8 @@ public class EstanteService {
 		estante.setCapacidade(entity.getCapacidade());
 	}
 	public void delete(Long id) {
-		if(livroRepository.existsByEstanteId(id)) throw new EstanteDeletionException(id);
 		if(!repository.existsById(id)) throw new EstanteNotFoundException(id);
+		if(livroRepository.existsByEstanteId(id)) throw new EstanteDeletionException(id);
 		repository.deleteById(id);
 	}
 }
