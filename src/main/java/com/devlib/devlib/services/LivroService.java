@@ -77,8 +77,8 @@ public class LivroService {
 		List<Categoria> listaCategoria = categoriaRepository.findAllById(livroDTO.getCategoriasId());
 		validationIdCategorias(idsCatRecebidos, listaCategoria);
 		livro.getCategorias().addAll(listaCategoria);
-		repository.save(livro);
-		return LivroResponseDTO.toResponseDTO(livro);
+		Livro livroSalvo = repository.save(livro);
+		return LivroResponseDTO.toResponseDTO(livroSalvo);
 	}
 	public LivroResponseDTO update(Long id, LivroUpdateDTO entity) {
 		Livro livro = repository.findById(id)
