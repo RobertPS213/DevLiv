@@ -5,10 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.devlib.devlib.entites.Autor;
-import com.devlib.devlib.entites.Categoria;
-import com.devlib.devlib.entites.Editora;
-import com.devlib.devlib.entites.Estante;
 import com.devlib.devlib.entites.Livro;
 
 public class LivroResponseDTO {
@@ -18,16 +14,16 @@ public class LivroResponseDTO {
 	private String isbn;
 	private Integer anoPublicacao;
 	private Integer numeroPaginas;
-	private Editora editora;
-	private Estante estante;
-	private Set<Autor> autores = new HashSet<>();
-	private Set<Categoria> categorias = new HashSet<>();
+	private EditoraResponseDTO editora;
+	private EstanteResponseDTO estante;
+	private Set<AutorResponseDTO> autores = new HashSet<>();
+	private Set<CategoriaResponseDTO> categorias = new HashSet<>();
 	
 	public LivroResponseDTO() {
 		
 	}
 	public LivroResponseDTO(Long id, String titulo, String isbn, Integer anoPublicacao, Integer numeroPaginas,
-			Editora editora, Estante estante, Set<Autor> autores, Set<Categoria> categorias) {
+			EditoraResponseDTO editora, EstanteResponseDTO estante, Set<AutorResponseDTO> autores, Set<CategoriaResponseDTO> categorias) {
 		this.id = id;
 		this.titulo = titulo;
 		this.isbn = isbn;
@@ -68,28 +64,28 @@ public class LivroResponseDTO {
 	public void setNumeroPaginas(Integer numeroPaginas) {
 		this.numeroPaginas = numeroPaginas;
 	}
-	public Editora getEditora() {
+	public EditoraResponseDTO getEditora() {
 		return editora;
 	}
-	public void setEditora(Editora editora) {
+	public void setEditora(EditoraResponseDTO editora) {
 		this.editora = editora;
 	}
-	public Estante getEstante() {
+	public EstanteResponseDTO getEstante() {
 		return estante;
 	}
-	public void setEstante(Estante estante) {
+	public void setEstante(EstanteResponseDTO estante) {
 		this.estante = estante;
 	}
-	public Set<Autor> getAutores() {
+	public Set<AutorResponseDTO> getAutores() {
 		return autores;
 	}
-	public void setAutores(Set<Autor> autores) {
+	public void setAutores(Set<AutorResponseDTO> autores) {
 		this.autores = autores;
 	}
-	public Set<Categoria> getCategorias() {
+	public Set<CategoriaResponseDTO> getCategorias() {
 		return categorias;
 	}
-	public void setCategorias(Set<Categoria> categorias) {
+	public void setCategorias(Set<CategoriaResponseDTO> categorias) {
 		this.categorias = categorias;
 	}
 	public static LivroResponseDTO toResponseDTO(Livro livro) {
@@ -99,10 +95,10 @@ public class LivroResponseDTO {
 		dto.setIsbn(livro.getIsbn());
 		dto.setAnoPublicacao(livro.getAnoPublicacao());
 		dto.setNumeroPaginas(livro.getNumeroPaginas());
-		dto.setEditora(livro.getEditora());
-		dto.setEstante(livro.getEstante());
-		dto.setAutores(livro.getAutores());
-		dto.setCategorias(livro.getCategorias());
+		dto.setEditora(EditoraResponseDTO.toResponseDTO(livro.getEditora()));
+		dto.setEstante(EstanteResponseDTO.toResponseDTO(livro.getEstante()));
+		dto.setAutores(AutorResponseDTO.toResponseDTOSet(livro.getAutores()));
+		dto.setCategorias(CategoriaResponseDTO.toResponseDTOSet(livro.getCategorias()));
 		return dto;
 	}
 	public static List<LivroResponseDTO> toResponseDTOList(List<Livro> livros){

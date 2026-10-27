@@ -1,7 +1,9 @@
 package com.devlib.devlib.dto.response;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.devlib.devlib.entites.Categoria;
 
@@ -44,8 +46,17 @@ public class CategoriaResponseDTO {
 		dto.setDescricao(categoria.getDescricao());
 		return dto;
 	}
+	// Necessario para repository.findAll()
 	public static List<CategoriaResponseDTO> toResponseDTOList(List<Categoria> categorias){
 		List<CategoriaResponseDTO> categoriasDTO = new ArrayList<>();
+		for(Categoria cat : categorias) {
+			categoriasDTO.add(toResponseDTO(cat));
+		}
+		return categoriasDTO;
+	}
+	// Necessario para classe LivroResponseDTO
+	public static Set<CategoriaResponseDTO> toResponseDTOSet(Set<Categoria> categorias){
+		Set<CategoriaResponseDTO> categoriasDTO = new HashSet<>();
 		for(Categoria cat : categorias) {
 			categoriasDTO.add(toResponseDTO(cat));
 		}
